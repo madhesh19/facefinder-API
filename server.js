@@ -12,10 +12,12 @@ const image = require('./controllers/image')
 const db = knex({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : 'postgres',
-    password : 'maddy',
-    database: 'facefinder'
+    connectionString : process.env.DATABASE_URL,
+    host : process.env.DATABASE_HOST,
+    port : 5432,
+    user : DATABASE_USER,
+    password : DATABASE_PW,
+    database: DATABASE_DB
   }
 })
 
@@ -43,3 +45,4 @@ app.put('/image', (req,res) => { image.handleImage(req,res,db) })
 app.listen(3000, () => {
   console.log('app is running on port 3000')
 })
+
